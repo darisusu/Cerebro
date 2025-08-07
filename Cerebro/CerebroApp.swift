@@ -7,27 +7,54 @@
 
 import SwiftUI
 
+
+private enum UIIdentifier {
+    static let immersiveSpace = "Object Placement"
+}
+
 @main
+@MainActor
 struct CerebroApp: App {
-
-    @State private var appModel = AppModel()
-
+    //    @State private var appState = AppState()
+    //    @State private var modelLoader = ModelLoader()
+    
+    //functions to be used ltr
+    @Environment(\.dismissImmersiveSpace) private var dismissImmersiveSpace
+    @Environment(\.scenePhase) private var scenePhase
+    
     var body: some Scene {
-        WindowGroup {
+        WindowGroup { //main 2D window
+            //calls on the contentview viewpage
             ContentView()
-                .environment(appModel)
         }
-
-        ImmersiveSpace(id: appModel.immersiveSpaceID) {
+        //need to load models async here...
+    
+        
+        ImmersiveSpace(id: "ImmersiveSpace"){ // shown when enter immersive space
             ImmersiveView()
-                .environment(appModel)
-                .onAppear {
-                    appModel.immersiveSpaceState = .open
-                }
-                .onDisappear {
-                    appModel.immersiveSpaceState = .closed
-                }
         }
-        .immersionStyle(selection: .constant(.full), in: .full)
+//        .onChange(of: scenePhase, intial: true){
+//            if scenePhase != .active, immersiveSpaceOpened {
+//                Task {
+//                    await dismissImmersiveSpace()
+//                    immersiveSpaceOpened = false
+                
+//                }
+//            }
+//        }
     }
 }
+    
+    
+    
+//    @State var immersionStyle: ImmersionStyle = .mixed //mixed space
+//    
+//    var body: some Scene {
+//        ImmersiveSpace {
+//            ContentView()
+//        }
+//        .immersionStyle(selection: $immersionStyle,
+//                        in: .mixed, .full, .progressive)
+//    }
+//}
+

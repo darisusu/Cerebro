@@ -18,6 +18,8 @@
 				</dict>
 			</array>
 		</dict>
+		<key>NSWorldSensingUsageDescription</key>
+		<string>Scan your environment to allow accurate object placement.</string>
 	</dict>
 </dict>
 </plist>
